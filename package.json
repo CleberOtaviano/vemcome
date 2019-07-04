@@ -1,0 +1,11 @@
+{
+  "name": "vemcome",
+  "version": "1.0.0",
+  "description": "PWA para avisar os manos das pessoas que vão comprar coisa fora no almoço",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cleber Otaviano",
+  "license": "ISC"
+}
