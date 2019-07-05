@@ -1,5 +1,6 @@
-# vemcome
+# Vem ComÊ
 PWA para avisar os manos se alguém vai comprar coisa fora no almoço!
+Testando os recursos free do Firebase, talvez usar heroku como API ou o Functiosn do Firebase mesmo
 
 Objetivos:
 - [x] Estrutura base do HTML
