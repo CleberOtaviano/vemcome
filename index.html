@@ -32,6 +32,7 @@
     </div>
 
     <div id="token" style="border: 1px solid #d8d8d8; padding: 1rem;"></div>
+    <textarea id="copyToken" style="margin: 1rem; padding: 1rem;" placeholder="Token App"></textarea>
     <div id="msg" style="border: 1px solid #d8d8d8; padding: 1rem;"></div>
 
     <div style="border: 1px solid #d8d8d8; padding: 1rem;">
@@ -102,6 +103,7 @@
             })
             .then(function(token) {
                 TokenElem.innerHTML = "token is : " + token
+                document.getElementById('copyToken').value =  token;
             })
             .catch(function (err) {
                 ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
