@@ -31,11 +31,27 @@
         <h1>VEM COMÊ!</h1>
     </div>
 
+    <div id="token" style="border: 1px solid #d8d8d8; padding: 1rem;"></div>
+    <div id="msg" style="border: 1px solid #d8d8d8; padding: 1rem;"></div>
+
+    <div style="border: 1px solid #d8d8d8; padding: 1rem;">
+        <p>Notificação:</p>
+        <div id="notis" style="padding: 1rem;"></div>
+    </div>
+
+    <div style="border: 1px solid red; padding: 1rem;">
+        <p>Erro:</p>
+        <div id="err"></div>
+    </div>
+
     <div>
         Povão:
         <ul id="lista">
         </ul>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script> -->
 
     <script src="/scripts/app.js"></script>
     <!-- CODELAB: Add the install script here -->
@@ -49,6 +65,52 @@
                     });
             });
         }
+    </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        MsgElem = document.getElementById("msg");
+        TokenElem = document.getElementById("token");
+        NotisElem = document.getElementById("notis");
+        ErrElem = document.getElementById("err");
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCSKxPKjHHEUVVj3CZiRytQNmBhrIHNrhU",
+            authDomain: "vemcome-1337.firebaseapp.com",
+            databaseURL: "https://vemcome-1337.firebaseio.com",
+            projectId: "vemcome-1337",
+            storageBucket: "",
+            messagingSenderId: "150906508976",
+            appId: "1:150906508976:web:6f9ea3cf3de0bb0e"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+        messaging
+            .requestPermission()
+            .then(function () {
+                MsgElem.innerHTML = "Notification permission granted."
+                console.log("Notification permission granted.");
+
+                // get the token in the form of promise
+                return messaging.getToken()
+            })
+            .then(function(token) {
+                TokenElem.innerHTML = "token is : " + token
+            })
+            .catch(function (err) {
+                ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+        messaging.onMessage(function(payload) {
+            console.log("Message received. ", payload);
+            NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload)
+        });
     </script>
 
 </body>
